@@ -53,7 +53,7 @@ lister_numero_lignes_par_type();;
 lister_numero_lignes_par_type ~types:[ MetroBus; Express ]();;
 
   
-(* -- trouver_service -------------------------------------------------------- * )
+(* -- trouver_service -------------------------------------------------------- *)
 (* Traitement des préconditions *)
 trouver_service ~date:0 ();;
 trouver_service ~date:fin_annee ();;    
@@ -63,7 +63,7 @@ trouver_service ();;
 trouver_service ~date:(samedi) ();;
 
 
-(* -- trouver_voyages_par_date ----------------------------------------------- *)
+(* -- trouver_voyages_par_date ----------------------------------------------- * )
 (* Traitement des préconditions *)
 trouver_voyages_par_date ~date:0 ();;
 trouver_voyages_par_date ~date:fin_annee ();;
