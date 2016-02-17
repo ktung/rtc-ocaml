@@ -1,7 +1,7 @@
 (* --------------------------------------------------------------------------- *)
 (* ----------------------- TP1 - IFT-3000 - Hiver 2016 ----------------------- *)
 (* --------------------------------------------------------------------------- *)
-(* Matricule étudiant: .........                                               *)
+(* Matricule étudiant: 111 139 433                                             *)
 (* --------------------------------------------------------------------------- *)
 (* -- PRINCIPALE FICHIER DU TP: FONCTIONS À COMPLÉTER ------------------------ *)
 (* --------------------------------------------------------------------------- *)
@@ -83,11 +83,9 @@ module Gestionnaire_transport : GESTIONNAIRE_TRANSPORT = struct
   (* @Precondition  : aucune                                                   *)
   (* @Postcondition : la liste retournée est correcte                          *)
   let lister_numero_lignes_par_type
-        ?(types = [ MetroBus; Express; LeBus; CoucheTard ]) () =      
-    (* Remplacer la ligne suivante par votre code *)
-    raise (Non_Implante "«lister_numero_lignes_par_type» à compléter")
+        ?(types = [ MetroBus; Express; LeBus; CoucheTard ]) () =
+    L.fold_left(fun acc t -> (t, H.fold(fun _ l acc2 -> if l.le_type = t && not(L.mem l.numero acc2) then l.numero::acc2 else acc2) lignes [])::acc) [] types
 
-             
   (* -- À IMPLANTER/COMPLÉTER (4 PTS) ---------------------------------------- *)
   (* @Fonction      : trouver_service : ?date:int -> unit -> string list       *)
   (* @Description   : trouve  les numéros des services associées à une date    *)

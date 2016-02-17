@@ -53,7 +53,7 @@ lister_numero_lignes_par_type();;
 lister_numero_lignes_par_type ~types:[ MetroBus; Express ]();;
 
   
-(* -- trouver_service -------------------------------------------------------- *)
+(* -- trouver_service -------------------------------------------------------- * )
 (* Traitement des préconditions *)
 trouver_service ~date:0 ();;
 trouver_service ~date:fin_annee ();;    
@@ -249,4 +249,6 @@ ligne_met_le_moins_temps station_desjardins' 1440;;
 timeRun (ligne_arrive_le_plus_tot station_desjardins') 1440;;
 timeRun (ligne_met_le_moins_temps station_desjardins') 1440;;
 secs_a_heure (heure_actuelle());;
+
+*)
     
