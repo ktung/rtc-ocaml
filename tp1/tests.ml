@@ -63,7 +63,7 @@ trouver_service ();;
 trouver_service ~date:(samedi) ();;
 
 
-(* -- trouver_voyages_par_date ----------------------------------------------- * )
+(* -- trouver_voyages_par_date ----------------------------------------------- *)
 (* Traitement des préconditions *)
 trouver_voyages_par_date ~date:0 ();;
 trouver_voyages_par_date ~date:fin_annee ();;
@@ -76,7 +76,7 @@ List.length (trouver_voyages_par_date ~date:samedi ());;
 List.length (trouver_voyages_par_date ~date:vendredi ());;
 
   
-(* -- trouver_voyages_sur_la_ligne ------------------------------------------- *)
+(* -- trouver_voyages_sur_la_ligne ------------------------------------------- * )
 (* Traitement des préconditions *)
 trouver_voyages_sur_la_ligne "0";;
 trouver_voyages_sur_la_ligne ~date:(Some 0) "7";;

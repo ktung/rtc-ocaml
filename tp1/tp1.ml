@@ -109,9 +109,10 @@ module Gestionnaire_transport : GESTIONNAIRE_TRANSPORT = struct
                       table de hachage des services                            *)
   (* @Postcondition : la liste retournée est correcte                          *)
   let trouver_voyages_par_date ?(date =date_actuelle ()) ()= 
-    (* Remplacer la ligne suivante par votre code *)
-    raise (Non_Implante "«trouver_voyages_par_date» à compléter")
-
+    if not(H.mem services date) then raise(Erreur "Date invalide ou pas prise en charge")
+    else L.fold_left(
+        fun acc s -> L.append (H.find_all voyages_par_service s) acc
+    ) [] (trouver_service ~date:date())
                
   (* ------------------------------------------------------------------------- *)
   (* @Fonction      : trouver_voyages_sur_la_ligne : 
