@@ -109,8 +109,8 @@ module Gestionnaire_transport : GESTIONNAIRE_TRANSPORT = struct
                       table de hachage des services                            *)
   (* @Postcondition : la liste retournée est correcte                          *)
   let trouver_voyages_par_date ?(date =date_actuelle ()) ()= 
-    if not(H.mem services date) then raise(Erreur "Date invalide ou pas prise en charge")
-    else L.fold_left(
+    if not(H.mem services date) then raise(Erreur "Date invalide ou pas prise en charge");
+    L.fold_left(
         fun acc s -> L.append (H.find_all voyages_par_service s) acc
     ) [] (trouver_service ~date:date())
                
@@ -150,8 +150,12 @@ module Gestionnaire_transport : GESTIONNAIRE_TRANSPORT = struct
   (* @Postcondition : la liste de paire (station, distance) doit être triée par 
                       distance croissante                                      *)
   let trouver_stations_environnantes pos rayon =
-    (* Remplacer la ligne suivante par votre code *)
-    raise (Non_Implante "«trouver_stations_environnantes» à compléter")
+    if not(valide_coord pos) then raise(Erreur "Position GPS invalide");
+    if rayon < 0.0 then raise(Erreur "Rayon négatif");
+     H.fold(fun id s acc ->
+        let dist = distance pos s.position_gps in
+          if dist <= rayon then (id, dist)::acc else acc
+     ) stations []
 
 	      
   (* -- À IMPLANTER/COMPLÉTER (8 PTS) ---------------------------------------- *)

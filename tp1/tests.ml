@@ -43,7 +43,7 @@ List.length (lister_id_stations ());;
 lister_id_stations ();;
 
   
-(* -- lister_numero_lignes_par_type ------------------------------------------ *)
+(* -- lister_numero_lignes_par_type ------------------------------------------ * )
 lister_numero_lignes_par_type();;
 
 (* Remet la limite de l'affichage à 300 éléments des listes *)  
@@ -76,7 +76,7 @@ List.length (trouver_voyages_par_date ~date:samedi ());;
 List.length (trouver_voyages_par_date ~date:vendredi ());;
 
   
-(* -- trouver_voyages_sur_la_ligne ------------------------------------------- * )
+(* -- trouver_voyages_sur_la_ligne ------------------------------------------- *)
 (* Traitement des préconditions *)
 trouver_voyages_sur_la_ligne "0";;
 trouver_voyages_sur_la_ligne ~date:(Some 0) "7";;
@@ -121,7 +121,7 @@ map_voyages_passants_itineraire
   (trouver_voyages_sur_la_ligne "800");;
 
   
-(* -- trouver_stations_environnantes ----------------------------------------- *)
+( * -- trouver_stations_environnantes ----------------------------------------- *)
 (* Traitement des préconditions *)
 trouver_stations_environnantes faux_gps 0.2;;
 trouver_stations_environnantes pouliot_gps (-0.2);;
@@ -132,7 +132,7 @@ trouver_stations_environnantes pouliot_gps 0.2;;
 trouver_stations_environnantes desjardins_gps 0.2;;
 
   
-(* -- lister_lignes_passantes_station ---------------------------------------- *)
+(* -- lister_lignes_passantes_station ---------------------------------------- * )
 (* Traitement des préconditions *)
 lister_lignes_passantes_station fausse_station;;
 
