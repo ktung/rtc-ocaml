@@ -168,7 +168,7 @@ module Gestionnaire_transport : GESTIONNAIRE_TRANSPORT = struct
   let lister_lignes_passantes_station st_id = 
     if not(H.mem stations st_id) then raise(Erreur "Station inexistante ");
     L.fold_left
-      (fun acc vid -> L.fold_left(fun acc num -> if L.mem num acc then acc else num::acc)
+      (fun acc vid -> L.fold_left(fun acc num -> if L.mem num acc then acc else acc@[num])
           acc
           (L.map (fun v -> (H.find lignes_par_id v.ligne_id)) (H.find_all voyages vid))
       )
