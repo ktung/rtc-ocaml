@@ -166,8 +166,14 @@ module Gestionnaire_transport : GESTIONNAIRE_TRANSPORT = struct
   (* @Postcondition : la liste doit être correcte même si l'ordre n'est pas 
                       important                                                *)
   let lister_lignes_passantes_station st_id = 
-    (* Remplacer la ligne suivante par votre code *)
-    raise (Non_Implante "«lister_lignes_passantes_station» à compléter")
+    if not(H.mem stations st_id) then raise(Erreur "Station inexistante ");
+    L.fold_left
+      (fun acc vid -> L.fold_left(fun acc num -> if L.mem num acc then acc else num::acc)
+          acc
+          (L.map (fun v -> (H.find lignes_par_id v.ligne_id)) (H.find_all voyages vid))
+      )
+      []
+      (H.find_all arrets_par_station st_id)
 
             
   (* -- À IMPLANTER/COMPLÉTER (6 PTS) ---------------------------------------- *)

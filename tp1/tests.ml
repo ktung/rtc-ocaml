@@ -132,7 +132,7 @@ trouver_stations_environnantes pouliot_gps 0.2;;
 trouver_stations_environnantes desjardins_gps 0.2;;
 
   
-(* -- lister_lignes_passantes_station ---------------------------------------- * )
+(* -- lister_lignes_passantes_station ---------------------------------------- *)
 (* Traitement des préconditions *)
 lister_lignes_passantes_station fausse_station;;
 
@@ -141,7 +141,7 @@ lister_lignes_passantes_station station_desjardins';;
 lister_lignes_passantes_station station_desjardins;;
 
   
-(* -- lister_arrets_par_voyage ----------------------------------------------- *)
+(* -- lister_arrets_par_voyage ----------------------------------------------- * )
 (* Traitement des préconditions *)
 lister_arrets_par_voyage "0";;
 
