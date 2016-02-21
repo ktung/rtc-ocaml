@@ -152,10 +152,12 @@ module Gestionnaire_transport : GESTIONNAIRE_TRANSPORT = struct
   let trouver_stations_environnantes pos rayon =
     if not(valide_coord pos) then raise(Erreur "Position GPS invalide");
     if rayon < 0.0 then raise(Erreur "Rayon négatif");
+    let acc = (
      H.fold(fun id s acc ->
         let dist = distance pos s.position_gps in
           if dist <= rayon then (id, dist)::acc else acc
      ) stations []
+    ) in L.sort (fun (_,e1) (_,e2) -> if e1 < e2 then -1 else if e1 > e2 then 1 else 0) acc
 
 	      
   (* -- À IMPLANTER/COMPLÉTER (8 PTS) ---------------------------------------- *)
@@ -184,8 +186,9 @@ module Gestionnaire_transport : GESTIONNAIRE_TRANSPORT = struct
   (* @Precondition  : le numero du voyage doit exister                         *)
   (* @Postcondition : la liste est correcte                                    *)
   let lister_arrets_par_voyage v_id =
-    (* Remplacer la ligne suivante par votre code *)
-    raise (Non_Implante "«lister_arrets_par_voyage» à compléter")
+   
+ if not(H.mem voyages v_id) then raise(Erreur "Voyage inexistant ");
+    H.find_all arrets_par_voyage v_id
 
 		 
   (* -- À IMPLANTER/COMPLÉTER (10 PTS) --------------------------------------- *)
