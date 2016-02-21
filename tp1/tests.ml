@@ -169,7 +169,7 @@ trouver_horaire_ligne_a_la_station "18" station_desjardins;;
 trouver_horaire_ligne_a_la_station "800" station_desjardins;;
 
 
-(* -- lister_stations_sur_itineraire_ligne ----------------------------------- *)*)
+(* -- lister_stations_sur_itineraire_ligne ----------------------------------- *)
 (* Traitement des préconditions *)
 lister_stations_sur_itineraire_ligne "0";;  
 

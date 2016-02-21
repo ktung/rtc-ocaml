@@ -186,9 +186,13 @@ module Gestionnaire_transport : GESTIONNAIRE_TRANSPORT = struct
   (* @Precondition  : le numero du voyage doit exister                         *)
   (* @Postcondition : la liste est correcte                                    *)
   let lister_arrets_par_voyage v_id =
-   
- if not(H.mem voyages v_id) then raise(Erreur "Voyage inexistant ");
-    H.find_all arrets_par_voyage v_id
+  if not(H.mem voyages v_id) then raise(Erreur "Voyage inexistant ");
+  let arrets_list = (L.fold_left (fun acc s_id -> H.find arrets (s_id, v_id)::acc) [] (H.find_all arrets_par_voyage v_id)) in (
+    let arrets_trie = (L.sort
+      (fun e1 e2 -> if e1.num_sequence < e2.num_sequence then -1 else if e1.num_sequence > e2.num_sequence then 1 else 0)
+      arrets_list
+    ) in (L.map (fun a -> a.station_id) arrets_trie)
+  )
 
 		 
   (* -- À IMPLANTER/COMPLÉTER (10 PTS) --------------------------------------- *)
