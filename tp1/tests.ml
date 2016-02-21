@@ -141,7 +141,7 @@ lister_lignes_passantes_station station_desjardins';;
 lister_lignes_passantes_station station_desjardins;;
 
   
-(* -- lister_arrets_par_voyage ----------------------------------------------- *)*)
+(* -- lister_arrets_par_voyage ----------------------------------------------- *)
 (* Traitement des préconditions *)
 lister_arrets_par_voyage "0";;
 
@@ -152,7 +152,7 @@ lister_arrets_par_voyage "47421501-20160013multiint-1111100";;
 lister_arrets_par_voyage "47421618-20160013multiint-1111100";;
 
    
-(* -- trouver_horaire_ligne_a_la_station -------------------------------------- * )
+(* -- trouver_horaire_ligne_a_la_station -------------------------------------- *)*)
 (* Traitement des préconditions *)
 trouver_horaire_ligne_a_la_station ~date:0 "800" station_desjardins;;
 trouver_horaire_ligne_a_la_station ~date:fin_annee "800" station_desjardins;;
@@ -169,7 +169,7 @@ trouver_horaire_ligne_a_la_station "18" station_desjardins;;
 trouver_horaire_ligne_a_la_station "800" station_desjardins;;
 
 
-(* -- lister_stations_sur_itineraire_ligne ----------------------------------- *)
+(* -- lister_stations_sur_itineraire_ligne ----------------------------------- * )
 (* Traitement des préconditions *)
 lister_stations_sur_itineraire_ligne "0";;  
 

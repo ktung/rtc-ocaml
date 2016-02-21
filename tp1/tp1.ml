@@ -213,8 +213,23 @@ module Gestionnaire_transport : GESTIONNAIRE_TRANSPORT = struct
   let trouver_horaire_ligne_a_la_station ?(date =date_actuelle ())
                                          ?(heure =heure_actuelle ())
                                          l_num st_id =
-    (* Remplacer la ligne suivante par votre code *)
-    raise (Non_Implante "«trouver_horaire_ligne_a_la_station» à compléter")
+    if not(H.mem services date) then raise(Erreur "Date invalide ou pas prise en charge");
+    if heure < 0 then raise(Erreur "Heure négative");
+    if not (H.mem lignes l_num) then raise (Erreur "Ligne invalide");
+    if not(H.mem stations st_id) then raise(Erreur "Station inexistante ");
+
+    let v_ids = trouver_voyages_sur_la_ligne ~date:(Some date) l_num in (
+      let arrets_list = (L.fold_left (fun acc v_id -> L.append (H.find_all arrets (st_id,v_id)) acc) [] v_ids) in (
+        if (L.length arrets_list = 0) then raise(Erreur "La ligne ne passe pas par la station");
+
+        let arrets_trie_heure = (L.fold_left (fun acc a -> if a.depart >= heure then a::acc else acc;) [] arrets_list) in (
+          let arrets_trie = (L.sort
+            (fun e1 e2 -> if e1.depart < e2.depart then -1 else if e1.depart > e2.depart then 1 else 0)
+            arrets_trie_heure
+          ) in (L.map (fun a -> secs_a_heure a.depart) arrets_trie)
+        )
+      )
+    )
 
 	     
   (* -- À IMPLANTER/COMPLÉTER (10 PTS) --------------------------------------- *)
