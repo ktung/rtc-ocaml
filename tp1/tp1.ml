@@ -299,8 +299,26 @@ module Gestionnaire_transport : GESTIONNAIRE_TRANSPORT = struct
   let duree_du_prochain_voyage_partant ?(date =date_actuelle ())
                                        ?(heure =heure_actuelle ())
                                        l_num st_id_dep st_id_dest = 
-    (* Remplacer la ligne suivante par votre code *)
-    raise (Non_Implante "«duree_du_prochain_voyage_partant» à compléter")
+    if not(H.mem services date) then raise(Erreur "Date invalide ou pas prise en charge");
+    if heure < 0 then raise(Erreur "Heure négative");
+    if not (H.mem lignes l_num) then raise (Erreur "Ligne invalide");
+    if not(H.mem stations st_id_dep) || not(H.mem stations st_id_dest) then raise(Erreur "Station inexistante ");
+    
+    let v_ids = trouver_voyages_sur_la_ligne ~date:(Some date) l_num in (
+      let arrets_dep_list = (L.fold_left (fun acc v_id -> L.append (H.find_all arrets (st_id_dep,v_id)) acc) [] v_ids) in (
+        if (L.length arrets_dep_list = 0) then raise(Erreur "La ligne ne passe pas par la station de départ");
+
+        let arrets_dep_trie_heure = (L.fold_left (fun acc a -> if a.depart >= heure then a::acc else acc;) [] arrets_dep_list) in (
+          let arret_dep = L.hd arrets_dep_trie_heure in (
+            let arret_arr = (try H.find arrets (st_id_dest, arret_dep.voyage_id) with 
+             | Not_found -> raise(Erreur "La ligne ne passe pas par la station de destination")
+           ) in (
+              (arret_arr.arrivee - arret_dep.depart)/60
+            )
+          )
+        )
+      )
+    )
                                                            
 
   (* -- À IMPLANTER/COMPLÉTER (12 PTS) --------------------------------------- *)
