@@ -152,7 +152,7 @@ lister_arrets_par_voyage "47421501-20160013multiint-1111100";;
 lister_arrets_par_voyage "47421618-20160013multiint-1111100";;
 
    
-(* -- trouver_horaire_ligne_a_la_station -------------------------------------- *)*)
+(* -- trouver_horaire_ligne_a_la_station -------------------------------------- *)
 (* Traitement des préconditions *)
 trouver_horaire_ligne_a_la_station ~date:0 "800" station_desjardins;;
 trouver_horaire_ligne_a_la_station ~date:fin_annee "800" station_desjardins;;
@@ -169,7 +169,7 @@ trouver_horaire_ligne_a_la_station "18" station_desjardins;;
 trouver_horaire_ligne_a_la_station "800" station_desjardins;;
 
 
-(* -- lister_stations_sur_itineraire_ligne ----------------------------------- * )
+(* -- lister_stations_sur_itineraire_ligne ----------------------------------- *)*)
 (* Traitement des préconditions *)
 lister_stations_sur_itineraire_ligne "0";;  
 
@@ -178,7 +178,7 @@ lister_stations_sur_itineraire_ligne "11";;
 lister_stations_sur_itineraire_ligne "800";;
 
 
-(* -- ligne_passe_par_station ------------------------------------------------ * )
+(* -- ligne_passe_par_station ------------------------------------------------ *)
 (* Traitement des préconditions *)
 ligne_passe_par_station "0" station_desjardins';;
 ligne_passe_par_station "801" fausse_station;;
@@ -189,7 +189,7 @@ ligne_passe_par_station "801" station_desjardins;;
 ligne_passe_par_station "11" 1076;;
 
   
-(* -- duree_du_prochain_voyage_partant --------------------------------------- *)
+(* -- duree_du_prochain_voyage_partant --------------------------------------- * )
 (* Traitement des préconditions *)
 duree_du_prochain_voyage_partant ~date:0 "11" 1815 1271;;
 duree_du_prochain_voyage_partant ~date:fin_annee "11" 1815 1271;;

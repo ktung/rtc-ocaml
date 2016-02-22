@@ -270,8 +270,13 @@ module Gestionnaire_transport : GESTIONNAIRE_TRANSPORT = struct
   (* @Precondition  : la ligne et la station existe                            *)
   (* @Postcondition : true si c'est le cas et false sinon                      *)
   let ligne_passe_par_station ?(date = Some (date_actuelle ())) l_num st_id =
-    (* Remplacer la ligne suivante par votre code *)
-    raise (Non_Implante "«ligne_passe_par_station» à compléter")
+    if not (H.mem lignes l_num) then raise (Erreur "Ligne invalide");
+    if not(H.mem stations st_id) then raise(Erreur "Station inexistante ");
+    let l_num = "800" and st_id = station_desjardins' and date = date_actuelle () in (
+      let v_ids = trouver_voyages_sur_la_ligne ~date:(Some date) l_num in (
+        if L.mem true (L.map (fun v_id -> H.mem arrets (st_id, v_id)) v_ids) then true else false;
+      )
+    )
 
                                
   (* --  À IMPLANTER/COMPLÉTER (12 PTS) -------------------------------------- *)
