@@ -205,7 +205,7 @@ duree_du_prochain_voyage_partant "800" station_desjardins' 1440;;
 duree_du_prochain_voyage_partant "11" 1815 1271;;
 
 
-(* -- duree_attente_prochain_arret_ligne_a_la_station ------------------------ *)*)
+(* -- duree_attente_prochain_arret_ligne_a_la_station ------------------------ *)
 (* Traitement des préconditions *)
 duree_attente_prochain_arret_ligne_a_la_station
   ~date:0 "800" station_desjardins';;
@@ -222,7 +222,7 @@ duree_attente_prochain_arret_ligne_a_la_station "11" 1815;;
 
 secs_a_heure (heure_actuelle());;
   
-(* -- ligne_arrive_le_plus_tot ----------------------------------------------- * )
+(* -- ligne_arrive_le_plus_tot ----------------------------------------------- *)*)
 (* Traitement des préconditions *)
 ligne_arrive_le_plus_tot ~date:0 station_desjardins' 1440;;
 ligne_arrive_le_plus_tot ~date:fin_annee station_desjardins' 1440;;
@@ -234,7 +234,7 @@ ligne_arrive_le_plus_tot station_desjardins' fausse_station;;
 ligne_arrive_le_plus_tot station_desjardins' 1440;;
 
 
-(* -- ligne_met_le_moins_temps ----------------------------------------------- *)
+(* -- ligne_met_le_moins_temps ----------------------------------------------- * )
 (* Traitement des préconditions *)
 ligne_met_le_moins_temps ~date:0 station_desjardins' 1440;;
 ligne_met_le_moins_temps ~date:fin_annee station_desjardins' 1440;;
