@@ -234,7 +234,7 @@ ligne_arrive_le_plus_tot station_desjardins' fausse_station;;
 ligne_arrive_le_plus_tot station_desjardins' 1440;;
 
 
-(* -- ligne_met_le_moins_temps ----------------------------------------------- * )
+(* -- ligne_met_le_moins_temps ----------------------------------------------- *)
 (* Traitement des préconditions *)
 ligne_met_le_moins_temps ~date:0 station_desjardins' 1440;;
 ligne_met_le_moins_temps ~date:fin_annee station_desjardins' 1440;;
@@ -250,5 +250,3 @@ timeRun (ligne_arrive_le_plus_tot station_desjardins') 1440;;
 timeRun (ligne_met_le_moins_temps station_desjardins') 1440;;
 secs_a_heure (heure_actuelle());;
 
-*)
-    

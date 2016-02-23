@@ -411,9 +411,27 @@ module Gestionnaire_transport : GESTIONNAIRE_TRANSPORT = struct
   let ligne_met_le_moins_temps ?(date =date_actuelle ())
                                ?(heure =heure_actuelle ())
                                st_id_dep st_id_dest = 
-    (* Remplacer la ligne suivante par votre code *)
-    raise (Non_Implante "«ligne_met_le_moins_temps» à compléter")
-
+    if not(H.mem services date) then raise(Erreur "Date invalide ou pas prise en charge");
+    if heure < 0 then raise(Erreur "Heure négative");
+    if not(H.mem stations st_id_dep) || not(H.mem stations st_id_dest) then raise(Erreur "Station inexistante ");
+    
+    let lignes_dep = (lister_lignes_passantes_station st_id_dep) in (
+      let lignes_dest = (lister_lignes_passantes_station st_id_dest) in (
+        let lignes = (L.fold_left (fun acc l -> if L.mem l lignes_dest then l::acc else acc) [] lignes_dep) in (
+          let lignes_duree = (L.map
+            (fun l -> try
+              (l, (duree_du_prochain_voyage_partant ~date:(date) ~heure:(heure) l st_id_dep st_id_dest))
+              with
+              | _ -> (l,-1);
+            ) lignes) in (
+            let lignes_duree_trie = (L.sort
+              (fun (_,e1) (_,e2) -> if e1 < e2 then -1 else if e1 > e2 then 1 else 0)
+              (L.filter (fun (_,d) -> if d > 0 then true else false) lignes_duree)
+            ) in (L.hd lignes_duree_trie)
+          )
+        )
+      )
+    )
 end;;
 
 
