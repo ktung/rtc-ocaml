@@ -222,7 +222,7 @@ duree_attente_prochain_arret_ligne_a_la_station "11" 1815;;
 
 secs_a_heure (heure_actuelle());;
   
-(* -- ligne_arrive_le_plus_tot ----------------------------------------------- *)*)
+(* -- ligne_arrive_le_plus_tot ----------------------------------------------- *)
 (* Traitement des préconditions *)
 ligne_arrive_le_plus_tot ~date:0 station_desjardins' 1440;;
 ligne_arrive_le_plus_tot ~date:fin_annee station_desjardins' 1440;;
@@ -249,4 +249,4 @@ ligne_met_le_moins_temps station_desjardins' 1440;;
 timeRun (ligne_arrive_le_plus_tot station_desjardins') 1440;;
 timeRun (ligne_met_le_moins_temps station_desjardins') 1440;;
 secs_a_heure (heure_actuelle());;
-
+*)

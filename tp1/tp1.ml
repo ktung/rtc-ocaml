@@ -254,8 +254,14 @@ module Gestionnaire_transport : GESTIONNAIRE_TRANSPORT = struct
  		      ligne donné                                              *)
   let lister_stations_sur_itineraire_ligne ?(date = Some (date_actuelle ()))
                                            l_num =
-    (* Remplacer la ligne suivante par votre code *)
-    raise (Non_Implante "«lister_stations_sur_itineraire_ligne» à compléter")
+    if not (H.mem lignes l_num) then raise (Erreur "Ligne inexistante");
+    let v_ids = trouver_voyages_sur_la_ligne ~date:date l_num in (
+      let voyages = (L.map (fun v_id -> H.find voyages v_id) v_ids) in (
+        let voyages_arrets = (L.map (fun v -> (v.destination, lister_arrets_par_voyage v.voyage_id)) voyages) in (
+          [L.hd voyages_arrets; L.nth voyages_arrets 1]
+        )
+      )
+    )
 
 
   (* -- À IMPLANTER/COMPLÉTER (4 PTS) ---------------------------------------- *)
