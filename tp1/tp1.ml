@@ -84,8 +84,8 @@ module Gestionnaire_transport : GESTIONNAIRE_TRANSPORT = struct
   (* @Postcondition : la liste retournée est correcte                          *)
   let lister_numero_lignes_par_type
         ?(types = [ MetroBus; Express; LeBus; CoucheTard ]) () =
-    L.fold_left(fun acc t -> (t, H.fold(
-        fun _ l acc2 -> if l.le_type = t && not(L.mem l.numero acc2) then l.numero::acc2 else acc2) lignes [])::acc
+    L.fold_left(fun acc t -> acc@[(t, H.fold(
+        fun _ l acc2 -> if l.le_type = t && not(L.mem l.numero acc2) then l.numero::acc2 else acc2) lignes [])]
     ) [] types
 
   (* -- À IMPLANTER/COMPLÉTER (4 PTS) ---------------------------------------- *)

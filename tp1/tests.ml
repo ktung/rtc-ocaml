@@ -43,7 +43,7 @@ List.length (lister_id_stations ());;
 lister_id_stations ();;
 
   
-(* -- lister_numero_lignes_par_type ------------------------------------------ * )
+(* -- lister_numero_lignes_par_type ------------------------------------------ *)
 lister_numero_lignes_par_type();;
 
 (* Remet la limite de l'affichage à 300 éléments des listes *)  
@@ -89,7 +89,7 @@ List.length (trouver_voyages_sur_la_ligne ~date:None "7");;
 
 timeRun (fun x -> List.length (trouver_voyages_sur_la_ligne ~date:None x)) "7";; 
 
-(* Affichage du nombre de voyages par ligne *)
+(* Affichage du nombre de voyages par ligne * )
 let t = Array.of_list (lister_numero_lignes ()) in
 let sum = ref 0 in
 let open Printf in
@@ -169,7 +169,7 @@ trouver_horaire_ligne_a_la_station "18" station_desjardins;;
 trouver_horaire_ligne_a_la_station "800" station_desjardins;;
 
 
-(* -- lister_stations_sur_itineraire_ligne ----------------------------------- *)*)
+(* -- lister_stations_sur_itineraire_ligne ----------------------------------- *)
 (* Traitement des préconditions *)
 lister_stations_sur_itineraire_ligne "0";;  
 
@@ -178,7 +178,7 @@ lister_stations_sur_itineraire_ligne "11";;
 lister_stations_sur_itineraire_ligne "800";;
 
 
-(* -- ligne_passe_par_station ------------------------------------------------ * )
+(* -- ligne_passe_par_station ------------------------------------------------ *)
 (* Traitement des préconditions *)
 ligne_passe_par_station "0" station_desjardins';;
 ligne_passe_par_station "801" fausse_station;;
