@@ -15,7 +15,7 @@ module Reseau_de_transport = struct
 
   module L = List
   module H = Hashtbl
-	
+  
   (* -- STRUCTURES DE DONNÉES ------------------------------------------------ *)
 
   (* -- Lignes - routes.txt -------------------------------------------------- *)
@@ -41,7 +41,7 @@ module Reseau_de_transport = struct
       ligne_id = int_of_string (L.nth liste 0);
       numero = enlever_guillemets (L.nth liste 2);
       noms_terminaux = 
-	(let temp = decouper_chaine (enlever_guillemets (L.nth liste 4)) " - " in
+  (let temp = decouper_chaine (enlever_guillemets (L.nth liste 4)) " - " in
          (L.nth temp 0), (L.nth temp 1));
       le_type = new_type_ligne (L.nth liste 7);
     }
@@ -60,14 +60,14 @@ module Reseau_de_transport = struct
       latitude : float;
       longitude : float;
     }
-	
+  
   let valide_coord c = 
     (* Cette fonction valide si une coordonnée géographique est correct        *)
     c.latitude >= 0.
     && c.latitude <= 90.
     && c.longitude >= -180.
     && c.longitude <= 180.
- 		
+    
   let distance a b = 
     (* Cette fonction calcule la distance à vol d'oiseau entre deux points de 
        la terre indiqués par leurs coordonnées gps. 
@@ -89,9 +89,9 @@ module Reseau_de_transport = struct
       nom = enlever_guillemets (L.nth liste 1);
       description = enlever_guillemets (L.nth liste 2);
       position_gps = { latitude = float_of_string (L.nth liste 3) ; 
-		       longitude = float_of_string (L.nth liste 4) };
+           longitude = float_of_string (L.nth liste 4) };
       embarque_chaise = 
-	(if int_of_string (L.nth liste 7) = 1 then true else false);
+  (if int_of_string (L.nth liste 7) = 1 then true else false);
     }
     
   (* -- Voyages - trips.txt -------------------------------------------------- *)
@@ -107,7 +107,7 @@ module Reseau_de_transport = struct
       embarque_chaise : bool;
     }
    and direction = Aller | Retour
-	
+  
   let new_voyage liste =
     {
       voyage_id = L.nth liste 2;
@@ -115,12 +115,12 @@ module Reseau_de_transport = struct
       service_id = L.nth liste 1;
       destination = enlever_guillemets (L.nth liste 3);
       direction_voyage = 
-	(if int_of_string (L.nth liste 5) = 0 then Aller else Retour);
+  (if int_of_string (L.nth liste 5) = 0 then Aller else Retour);
       itineraire_id = int_of_string (L.nth liste 7);
       embarque_chaise = 
-	(if int_of_string (L.nth liste 8) = 1 then true else false);
+  (if int_of_string (L.nth liste 8) = 1 then true else false);
     }
-	
+  
   (* -- Arrêts - stop_times.txt ---------------------------------------------- *)
   type arret = 
     {
@@ -132,7 +132,7 @@ module Reseau_de_transport = struct
       embarque_client : bool;
       debarque_client : bool;
     }
-		 
+     
   let new_arret liste = 
     {
       station_id = int_of_string (L.nth liste 3);
@@ -141,11 +141,11 @@ module Reseau_de_transport = struct
       depart = heure_a_nbsecs (L.nth liste 2);
       num_sequence = int_of_string (L.nth liste 4);
       embarque_client = 
-	(if int_of_string (L.nth liste 5) = 0 then true else false);
+  (if int_of_string (L.nth liste 5) = 0 then true else false);
       debarque_client = 
-	(if int_of_string (L.nth liste 6) = 0 then true else false);
+  (if int_of_string (L.nth liste 6) = 0 then true else false);
     }
-	
+  
   (* -- Services - calendar_dates.txt ---------------------------------------- *)
   type service = 
     {
@@ -194,19 +194,19 @@ module Reseau_de_transport = struct
   (* -- Chargement de fichier et remplissage des tables de hachage ----------- *)
   let charger_tout ?(rep = "/home/etudiant/workspace/tp1/rtc_data/") () =
     L.iter (fun (l: ligne) -> H.add lignes  l.numero l;
-			      H.add lignes_par_id l.ligne_id  l.numero)
+            H.add lignes_par_id l.ligne_id  l.numero)
            (charger_donnees (rep ^ "routes.txt") new_ligne);
     L.iter (fun (s: station) -> H.add stations s.station_id s)
            (charger_donnees (rep ^ "stops.txt") new_station);
     L.iter (fun (v: voyage) -> H.add voyages v.voyage_id v; 
-			       H.add voyages_par_service v.service_id
+             H.add voyages_par_service v.service_id
                                      v.voyage_id;
-			       H.add voyages_par_ligne v.ligne_id
+             H.add voyages_par_ligne v.ligne_id
                                      v.voyage_id)
            (charger_donnees (rep ^ "trips.txt") new_voyage);
     L.iter (fun (a: arret) -> H.add arrets (a.station_id, a.voyage_id) a;
-			      H.add arrets_par_voyage a.voyage_id a.station_id;
-			      H.add arrets_par_station a.station_id a.voyage_id)
+            H.add arrets_par_voyage a.voyage_id a.station_id;
+            H.add arrets_par_station a.station_id a.voyage_id)
            (charger_donnees (rep ^ "stop_times.txt") new_arret);
     L.iter (fun (s: service) -> H.add services s.date s.service_id)
            (charger_donnees (rep ^ "calendar_dates.txt") new_service);

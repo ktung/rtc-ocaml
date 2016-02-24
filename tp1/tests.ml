@@ -89,7 +89,7 @@ List.length (trouver_voyages_sur_la_ligne ~date:None "7");;
 
 timeRun (fun x -> List.length (trouver_voyages_sur_la_ligne ~date:None x)) "7";; 
 
-(* Affichage du nombre de voyages par ligne * )
+(* Affichage du nombre de voyages par ligne *)
 let t = Array.of_list (lister_numero_lignes ()) in
 let sum = ref 0 in
 let open Printf in
@@ -249,4 +249,4 @@ ligne_met_le_moins_temps station_desjardins' 1440;;
 timeRun (ligne_arrive_le_plus_tot station_desjardins') 1440;;
 timeRun (ligne_met_le_moins_temps station_desjardins') 1440;;
 secs_a_heure (heure_actuelle());;
-*)
+    
