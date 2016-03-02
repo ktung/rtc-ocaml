@@ -308,23 +308,34 @@ module Gestionnaire_transport : GESTIONNAIRE_TRANSPORT = struct
     if not (H.mem lignes l_num) then raise (Erreur "Ligne inexistante");
     if not(H.mem stations st_id_dep) || not(H.mem stations st_id_dest) then raise(Erreur "Station inexistante ");
     
-    let v_ids = trouver_voyages_sur_la_ligne ~date:(Some date) l_num in (
-      let arrets_dep_list = (L.fold_left (fun acc v_id -> L.append (H.find_all arrets (st_id_dep,v_id)) acc) [] v_ids) in (
-        if (L.length arrets_dep_list = 0) then raise(Erreur "La ligne ne passe pas par la station de départ");
+    let li_voyages = trouver_voyages_sur_la_ligne ~date:(Some date) l_num in (
+    let lignes_dep = L.sort (fun (e1,_) (e2,_) -> if e1 < e2 then -1 else if e1 > e2 then 1 else 0) (H.fold
+      (fun k v acc ->
+        if (fst k) = st_id_dep && (L.mem (snd k) li_voyages) && v.depart >= heure
+          then (v.depart, (snd k))::acc
+        else acc
+      )
+      arrets []
+    ) in (
+      if L.length lignes_dep = 0 then raise (Erreur "La ligne ne passe pas par la station de départ");
 
-        let arrets_dep_trie_heure = (L.fold_left (fun acc a -> if a.depart >= heure then a::acc else acc;) [] arrets_dep_list) in (
-          if (L.length arrets_dep_trie_heure = 0) then raise(Erreur "Pas de tel prochain voyage pour la ligne!");
+      let lignes_dest = (H.fold
+        (fun k v acc ->
+          if (fst k) = st_id_dest && (L.mem (snd k) li_voyages) then (v.arrivee, (snd k))::acc
+          else acc
+        )
+          arrets []) in
+       if L.length lignes_dest = 0 then raise (Erreur "La ligne ne passe pas par la station de destination");
 
-          let arret_dep = L.hd arrets_dep_trie_heure in (
-            let arret_arr = (try H.find arrets (st_id_dest, arret_dep.voyage_id) with 
-             | Not_found -> raise(Erreur "La ligne ne passe pas par la station de destination")
-           ) in (
-              (arret_arr.arrivee - arret_dep.depart)/60
-            )
-          )
+       let liste_voyages = List.fold_left (fun acc (depart, v_id) -> if L.mem v_id (L.map (fun (_,vid) -> vid) lignes_dest) then acc@[(depart, v_id)] else acc) [] lignes_dep in (
+        if L.length liste_voyages = 0 then raise (Erreur "Pas de tel prochain voyage pour la ligne!");
+
+        let le_voyage = L.filter (fun (arrivee, v_id) -> if v_id = snd(L.hd liste_voyages) then true else false) lignes_dest in (
+          (fst(L.hd le_voyage) - fst(L.hd liste_voyages))/60
         )
       )
     )
+  )
                                                            
 
   (* -- À IMPLANTER/COMPLÉTER (12 PTS) --------------------------------------- *)
