@@ -1,0 +1,24 @@
+			NOTE ET COMMENTAIRES
+			--------------------
+
+
+lister_numero_lignes_par_type : 6./6.
+trouver_service : 4./4.
+trouver_voyages_par_date : 4./4.
+trouver_stations_environnantes : 6./6.
+lister_lignes_passantes_station : 8./8.
+lister_arrets_par_voyage : 6./6.
+trouver_horaire_ligne_a_la_station : 10./10.
+lister_stations_sur_itineraire_ligne : 10./10.
+ligne_passe_par_station : 4./4.
+duree_du_prochain_voyage_partant : 12./12.
+duree_attente_prochain_arret_ligne_a_la_station : 12./12.
+ligne_arrive_le_plus_tot : 10./10.
+ligne_met_le_moins_temps : 8./8.
+
+NOTE FINALE : 100./100
+
+
+COMMENTAIRES:
+Bravo!
+
